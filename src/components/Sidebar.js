@@ -1,11 +1,16 @@
 import React from 'react'
 import './Sidebar.css'
 import { Avatar } from '@mui/material'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../features/userSlice'
 
 function Sidebar() {
 
+    // we are pulling the info from the redux data layer into the post
+    const user = useSelector(selectUser);
+
     // we create a simple function that will return us the jsx so that we can reuse it
-    const recentItem =(topic)=>(
+    const recentItem = (topic) => (
         <div className="sidebar__recentItem">
             <span className="sidebar__hash">#</span>
             <p>{topic}</p>
@@ -16,9 +21,9 @@ function Sidebar() {
         <div className='sidebar'>
             <div className="sidebar__top">
                 <img src="https://wallpaperaccess.com/full/2024139.jpg" alt="" />
-                <Avatar className="sidebar__avatar" />
-                <h2>Gurpartap Singh</h2>
-                <h4>gurpartap6125@gmail.com</h4>
+                <Avatar src={user.photoURL} className="sidebar__avatar" >{user.displayName[0]}</Avatar>
+                <h2>{user.displayName}</h2>
+                <h4>{user.email}</h4>
             </div>
 
             <div className="sidebar__stats">
